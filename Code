@@ -1,0 +1,28 @@
+# Sentiment Analyzer using VADER (NLTK)
+# Author: Prisha Patel
+# Goal: Analyze sentiment of text samples (positive, negative, neutral)
+
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+# Download VADER Lexicon (only the first time)
+nltk.download('vader_lexicon')
+
+# Initialize Sentiment Analyzer
+sia = SentimentIntensityAnalyzer()
+
+# Sample Sentences
+sentences = [
+    "I love working on machine learning projects!",
+    "This internship application process is so stressful.",
+    "Today was okay, nothing special.",
+    "I’m feeling super productive and motivated!",
+    "I’m not happy with the outcome."
+]
+
+# Analyze Sentiment
+for sentence in sentences:
+    scores = sia.polarity_scores(sentence)
+    compound = scores['compound']
+    sentiment = "Positive" if compound > 0.05 else "Negative" if compound < -0.05 else "Neutral"
+    print(f"{sentence}\n→ Sentiment: {sentiment} (Score: {compound})\n")
